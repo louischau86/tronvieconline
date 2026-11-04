@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Trốn việc 8h–17h</title>
+<style>
+:root{--bg:#e6ebf0;--pn:#fff;--tx:#1d2733;--mu:#667585;--ln:#cfd8e1;--wk:#1f7a4d;--fn:#c2410c;--bad:#c62828;--xl:#217346;--fb:#3b5998;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#12171d;--pn:#1c242d;--tx:#e8edf2;--mu:#8fa0b0;--ln:#2d3844;--wk:#4cc38a;--fn:#ff8a50;--bad:#ff6b6b;--xl:#2e9e63;--fb:#6d8fd6}}
+:root[data-theme="dark"]{--bg:#12171d;--pn:#1c242d;--tx:#e8edf2;--mu:#8fa0b0;--ln:#2d3844;--wk:#4cc38a;--fn:#ff8a50;--bad:#ff6b6b;--xl:#2e9e63;--fb:#6d8fd6}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--bg);color:var(--tx);font:16px/1.45 "Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;min-height:100%}
+.app{max-width:640px;margin:0 auto;padding:14px;display:grid;gap:12px}
+.top{display:flex;justify-content:space-between;align-items:center;gap:8px}
+.clock{font-size:34px;font-weight:700;font-variant-numeric:tabular-nums;letter-spacing:-.5px}
+.strikes{font-size:14px;color:var(--mu);text-align:right}
+.strikes b{font-size:20px;letter-spacing:3px}
+.boss{background:var(--pn);border:2px solid var(--ln);border-radius:10px;padding:10px 14px;display:flex;align-items:center;gap:12px;transition:background .15s,border-color .15s}
+.boss .em{font-size:30px}
+.boss.warn{border-color:var(--fn);animation:sh .18s infinite}
+.boss.here{border-color:var(--bad);background:color-mix(in srgb,var(--bad) 16%,var(--pn))}
+@keyframes sh{50%{transform:translateX(3px)}}
+@media (prefers-reduced-motion:reduce){.boss.warn{animation:none}}
+.bars{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.bar label{font-size:13px;color:var(--mu);display:flex;justify-content:space-between}
+.bar i{display:block;height:12px;background:var(--ln);border-radius:6px;overflow:hidden;margin-top:3px}
+.bar i b{display:block;height:100%;width:50%;transition:width .1s linear}
+#bd b{background:var(--wk)}#bf b{background:var(--fn)}
+.win{background:var(--pn);border:1px solid var(--ln);border-radius:8px;overflow:hidden;min-height:230px}
+.wt{padding:7px 12px;color:#fff;font-size:14px;font-weight:600}
+.work .wt{background:var(--xl)}.slack .wt{background:var(--fb)}
+.work table{border-collapse:collapse;width:100%;font-size:13px;font-variant-numeric:tabular-nums}
+.work td,.work th{border:1px solid var(--ln);padding:5px 8px;text-align:right}
+.work th{background:var(--bg);color:var(--mu);font-weight:600}
+.work td:first-child{text-align:left}
+.feed{padding:10px 12px;display:grid;gap:8px}
+.post{border:1px solid var(--ln);border-radius:8px;padding:8px 10px;font-size:14px}
+.post small{color:var(--mu);display:block}
+.hide{display:none}
+.btn{font:inherit;font-weight:700;border:0;border-radius:10px;padding:14px;width:100%;cursor:pointer;color:#fff;background:var(--fb)}
+.btn.w{background:var(--xl)}
+.btn:focus-visible{outline:3px solid var(--fn);outline-offset:2px}
+.log{min-height:24px;font-size:14px;color:var(--mu);text-align:center}
+.ov{position:fixed;inset:0;background:rgba(10,15,20,.72);display:flex;align-items:center;justify-content:center;padding:20px;z-index:5}
+.ov.hide{display:none}
+.card{background:var(--pn);border-radius:14px;padding:22px;max-width:420px;width:100%}
+.card h1{font-size:24px;margin:0 0 8px;line-height:1.2}
+.card p{margin:6px 0}
+.card .btn{margin-top:14px;background:var(--wk);color:#fff}
+kbd{background:var(--bg);border:1px solid var(--ln);border-radius:4px;padding:0 6px}
+.scene{width:100%;height:auto;display:block;border:1px solid var(--ln);border-radius:10px;overflow:hidden}
+.scene .dopen,.scene .dsil,.scene .bhere,.scene .sfb{display:none}
+.scene.warn .dclosed,.scene.here .dclosed{display:none}
+.scene.warn .dopen,.scene.here .dopen{display:block}
+.scene.warn .dsil{display:block}
+.scene.here .bhere{display:block}
+.scene.slack .sfb{display:block}.scene.slack .sxl{display:none}
+.post{display:flex;gap:10px;align-items:center}
+.th{width:44px;height:44px;border-radius:8px;background:var(--bg);display:grid;place-items:center;font-size:26px;flex:none}
+.mute{font-size:20px;background:var(--pn);border:1px solid var(--ln);border-radius:8px;padding:4px 10px;cursor:pointer}
+.zalo{position:fixed;right:max(12px,env(safe-area-inset-right,0px));top:calc(env(safe-area-inset-top,0px) + 12px);z-index:4;display:flex;gap:10px;align-items:center;background:var(--pn);border:1px solid var(--ln);border-left:5px solid #0068ff;border-radius:10px;padding:10px 12px;max-width:300px;box-shadow:0 6px 20px rgba(0,0,0,.25);cursor:pointer;font:inherit;color:var(--tx);text-align:left;animation:pop .25s}
+.zalo.hide{display:none}
+.zalo .zi{width:36px;height:36px;border-radius:10px;background:#0068ff;color:#fff;font-weight:800;display:grid;place-items:center;flex:none}
+.zalo small{display:block;color:var(--mu)}
+@keyframes pop{from{transform:translateY(-14px);opacity:0}}
+.nm{font:inherit;width:100%;padding:10px 12px;margin-top:10px;border:1px solid var(--ln);border-radius:8px;background:var(--bg);color:var(--tx)}
+.row{display:flex;gap:8px}
+.card .btn.sm{padding:10px;font-size:14px;background:var(--fb)}
+.card .btn.sm:disabled{opacity:.6;cursor:default}
+.lb{margin-top:10px;font-size:14px}
+.lr{display:flex;justify-content:space-between;padding:4px 0;border-bottom:1px solid var(--ln)}
+.lb small{color:var(--mu)}
+</style>
+</head>
+<body>
+<div class="app">
+  <div class="top">
+    <div class="clock" id="clock">08:00</div>
+    <button class="mute" id="mute" aria-label="Bật hoặc tắt âm thanh">🔊</button><div class="strikes">Cảnh cáo<br><b id="stk">○○○</b></div>
+  </div>
+  <svg class="scene away work" id="scene" viewBox="0 0 600 170" role="img" aria-label="Văn phòng: bạn ngồi ở bàn, cửa phòng sếp ở bên phải">
+<rect width="600" height="170" fill="var(--pn)"/>
+<rect y="130" width="600" height="40" fill="var(--ln)"/>
+<rect x="30" y="20" width="110" height="70" rx="4" fill="#8ec9ee" stroke="var(--mu)" stroke-width="3"/>
+<path d="M85 20v70M30 55h110" stroke="var(--mu)" stroke-width="3"/>
+<g class="dclosed"><rect x="500" y="18" width="70" height="112" rx="3" fill="#a9763f"/><circle cx="514" cy="76" r="4" fill="#f2c94c"/><text x="535" y="46" text-anchor="middle" font-size="11" fill="#fff">SẾP</text></g>
+<g class="dopen"><rect x="500" y="18" width="70" height="112" rx="3" fill="#2a2118"/></g>
+<g class="dsil"><path d="M500 130L330 152L330 162L525 132Z" fill="#000" opacity=".18"/><circle cx="535" cy="62" r="13" fill="#0b0b0b"/><rect x="516" y="75" width="38" height="55" rx="9" fill="#0b0b0b"/></g>
+<rect x="90" y="112" width="24" height="18" fill="#b5651d"/><circle cx="96" cy="104" r="10" fill="#3f9b5f"/><circle cx="108" cy="100" r="11" fill="#2f8a50"/><circle cx="102" cy="92" r="9" fill="#3f9b5f"/>
+<rect x="190" y="108" width="220" height="10" rx="2" fill="var(--mu)"/><rect x="200" y="118" width="8" height="38" fill="var(--mu)"/><rect x="392" y="118" width="8" height="38" fill="var(--mu)"/>
+<rect x="262" y="54" width="108" height="54" rx="5" fill="#222"/><rect x="293" y="100" width="16" height="8" fill="#333"/>
+<g class="sxl"><rect x="267" y="59" width="98" height="40" fill="#217346"/><path d="M267 71h98M267 83h98M290 59v40M320 59v40M345 59v40" stroke="#fff" stroke-opacity=".5"/></g>
+<g class="sfb"><rect x="267" y="59" width="98" height="40" fill="#3b5998"/><rect x="273" y="65" width="86" height="9" rx="2" fill="#fff" opacity=".85"/><rect x="273" y="78" width="60" height="6" rx="2" fill="#fff" opacity=".6"/><rect x="273" y="88" width="74" height="6" rx="2" fill="#fff" opacity=".6"/></g>
+<rect x="372" y="96" width="14" height="12" rx="2" fill="#fff" stroke="var(--mu)"/><path d="M376 92q3-5 0-9M382 92q3-5 0-9" stroke="var(--mu)" fill="none"/>
+<rect x="196" y="88" width="20" height="48" rx="6" fill="var(--mu)" opacity=".6"/>
+<rect x="214" y="88" width="36" height="44" rx="10" fill="#4a6fa5"/><circle cx="232" cy="72" r="14" fill="#f1c27d"/><path d="M218 70q2-14 16-13q10 2 12 12q-8-6-28 1Z" fill="#2b1d12"/>
+<g class="bhere"><rect x="420" y="84" width="58" height="64" rx="10" fill="#2b2f3a"/><path d="M449 84l-7 12l7 38l7-38Z" fill="#c62828"/><circle cx="449" cy="64" r="19" fill="#f1c27d"/><path d="M436 58l10 4M462 58l-10 4" stroke="#2b1d12" stroke-width="3"/><circle cx="442" cy="66" r="2" fill="#222"/><circle cx="456" cy="66" r="2" fill="#222"/><path d="M441 76q8-5 16 0" stroke="#8a2a2a" stroke-width="2" fill="none"/><rect x="428" y="148" width="16" height="12" fill="#111"/><rect x="454" y="148" width="16" height="12" fill="#111"/></g>
+</svg>
+<div class="boss" id="boss"><span class="em" id="bem">🚪</span><span id="btx">Sếp đang họp trong phòng.</span></div>
+  <div class="bars">
+    <div class="bar" id="bd"><label><span>Chăm chỉ</span><span id="vd"></span></label><i><b></b></i></div>
+    <div class="bar" id="bf"><label><span>Vui vẻ</span><span id="vf"></span></label><i><b></b></i></div>
+  </div>
+  <div class="win work" id="wk"><div class="wt">Bao_cao_Q4_final_v7.xlsx</div><div id="grid"></div></div>
+  <div class="win slack hide" id="sl"><div class="wt">Facebook – đang lướt</div><div class="feed" id="feed"></div></div>
+  <button class="btn" id="tg">Lướt mạng (Space)</button>
+  <div class="log" id="log">&nbsp;</div>
+</div>
+
+<button class="zalo hide" id="zalo"><span class="zi">Z</span><span><b id="zn"></b><small id="zm"></small></span></button>
+<div class="ov" id="ov"><div class="card" id="card"></div></div>
+
+<script>
+const $=id=>document.getElementById(id);
+const START=480,END=1020;
+let S=null,last=0,raf=0;
+
+const POSTS=["Meme con mèo ngồi họp Zoom","Bạn cũ vừa đi Đà Lạt, 2,3k lượt thích","Review quán trà sữa mới mở gần công ty","Video nấu ăn 60 giây, bạn đã xem 3 lần","Tranh cãi về dứa trên pizza, 840 bình luận","Mẹo năm việc nhẹ nhàng lương cao"];
+function buildGrid(){
+  let h="<table><tr><th>Hạng mục</th><th>Q3</th><th>Q4</th><th>%</th></tr>";
+  for(let i=1;i<=6;i++){const a=Math.round(80+Math.random()*900),b=Math.round(80+Math.random()*900);
+    h+=`<tr><td>Dòng ${i}</td><td>${a}</td><td>${b}</td><td>${Math.round((b-a)/a*100)}%</td></tr>`}
+  let c='<svg viewBox="0 0 300 60" style="width:100%;height:70px;display:block;padding:6px 10px" aria-hidden="true"><g fill="var(--xl)">';for(let i=0;i<10;i++){const v=10+Math.random()*45;c+=`<rect x="${i*30+6}" y="${58-v}" width="20" height="${v}" rx="2"/>`}
+  $("grid").innerHTML=c+"</g></svg>"+h+"</table>";
+}
+function buildFeed(){
+  const E=["😹","🏝️","🧋","🍳","🍕","💼"];const p=POSTS.map((t,i)=>[t,E[i]]).sort(()=>Math.random()-.5).slice(0,4);
+  $("feed").innerHTML=p.map(t=>`<div class="post"><span class="th">${t[1]}</span><span>${t[0]}<small>Vừa xong</small></span></div>`).join("");
+}
+function say(t){$("log").textContent=t}
+const GAME_URL=location.href.split(/[?#]/)[0],LK="tronviec-lb";
+let DB=null,UID=null,remote=[];
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+function lsGet(){try{return JSON.parse(localStorage.getItem(LK)||"[]")}catch(e){return[]}}
+function lsName(){try{return localStorage.getItem("tronviec-name")||""}catch(e){return""}}
+function renderLB(){
+  const el=$("lb");if(!el)return;
+  const shared=remote.length>0,rows=(shared?remote:lsGet()).slice(0,8);
+  el.innerHTML=rows.length?"<b>"+(shared?"Bảng xếp hạng chung":"Điểm cao trên máy này")+"</b>"+rows.map((r,i)=>`<div class="lr"><span>${i+1}. ${esc(r.name||"Ẩn danh")}</span><b>${esc(r.score)}</b></div>`).join(""):"<small>Chưa có điểm nào. Lưu điểm đầu tiên của bạn nhé.</small>";
+}
+function endExtras(title){
+  const sc=Math.round(S.chill);
+  $("nm").value=lsName();renderLB();
+  $("shr").onclick=async()=>{
+    const t=`🏢 Trốn việc 8h–17h\n${title}\nĐiểm chill: ${sc} | Cảnh cáo: ${S.strikes}/3\nBạn trốn được bao lâu? ${GAME_URL}`;
+    try{if(navigator.share){await navigator.share({text:t});return}}catch(e){if(e&&e.name==="AbortError")return}
+    try{await navigator.clipboard.writeText(t);$("shr").textContent="Đã chép, dán vào nhóm chat"}catch(e){window.prompt("Chép đoạn này rồi dán vào nhóm chat:",t)}
+  };
+  $("sv").onclick=async()=>{
+    const n=($("nm").value.trim()||"Ẩn danh").slice(0,16);
+    try{localStorage.setItem("tronviec-name",n)}catch(e){}
+    const a=lsGet();a.push({name:n,score:sc});a.sort((x,y)=>y.score-x.score);
+    try{localStorage.setItem(LK,JSON.stringify(a.slice(0,8)))}catch(e){}
+    $("sv").disabled=true;$("sv").textContent="Đã lưu trên máy này";
+    if(DB&&UID){try{const ref=DB.collection("scores").doc(UID),d=await ref.get(),best=d.exists?(d.data().score||0):0;if(sc>best)await ref.set({name:n,score:sc});$("sv").textContent="Đã lưu vào bảng chung"}catch(e){}}
+    renderLB();
+  };
+}
+function updScene(){$("scene").setAttribute("class","scene "+S.boss+" "+S.mode)}
+let AC=null,muted=false;
+function ac(){if(!AC){try{AC=new (window.AudioContext||window.webkitAudioContext)()}catch(e){}}if(AC&&AC.state==="suspended")AC.resume();return AC}
+function tone(f,d,type,v,at,f2){const a=ac();if(!a||muted)return;const o=a.createOscillator(),g=a.createGain(),t=a.currentTime+(at||0);o.type=type||"sine";o.frequency.setValueAtTime(f,t);if(f2)o.frequency.exponentialRampToValueAtTime(f2,t+d);g.gain.setValueAtTime(v||.15,t);g.gain.exponentialRampToValueAtTime(.001,t+d);o.connect(g);g.connect(a.destination);o.start(t);o.stop(t+d)}
+const SFX={click:()=>tone(520,.06,"square",.06),step:()=>{[0,.25,.5].forEach(x=>tone(90,.12,"sine",.4,x))},zalo:()=>{tone(880,.12,"triangle",.2);tone(1175,.2,"triangle",.2,.12)},caught:()=>tone(300,.5,"sawtooth",.2,0,80),win:()=>[523,659,784,1047].forEach((f,i)=>tone(f,.2,"triangle",.2,i*.12)),lose:()=>[400,330,260,180].forEach((f,i)=>tone(f,.25,"sawtooth",.15,i*.15))};
+const ZM=[["Chị Lan – Kế toán","Trưa nay ăn gì, đặt cơm tấm nhé?"],["Nhóm Bạn Thân","Ê tối nay nhậu không mày?"],["Shop Online","Đơn của bạn đang giao, giảm 50% hôm nay!"],["Mẹ","Con nhớ ăn cơm trưa nha"],["Anh Tuấn – IT","Mật khẩu wifi mới nè"]];
+function showZalo(){const m=ZM[Math.floor(Math.random()*ZM.length)];$("zn").textContent=m[0];$("zm").textContent=m[1];$("zalo").classList.remove("hide");S.za=4;SFX.zalo()}
+function zaloTick(dt){S.zt-=dt;if(S.za>0){S.za-=dt;if(S.za<=0)$("zalo").classList.add("hide")}else if(S.zt<=0){showZalo();S.zt=9+Math.random()*8}}
+function fmt(t){const m=Math.floor(t);return String(Math.floor(m/60)).padStart(2,"0")+":"+String(m%60).padStart(2,"0")}
+
+function start(){
+  ac();$("zalo").classList.add("hide");S={t:START,dil:60,fun:50,strikes:0,mode:"work",boss:"away",bt:4,caught:false,over:false,chill:0,zt:7,za:0};
+  $("ov").classList.add("hide");
+  setMode("work");buildGrid();say("Giả vờ chăm chỉ đi nào.");
+  last=performance.now();cancelAnimationFrame(raf);raf=requestAnimationFrame(loop);
+}
+function setMode(m){
+  S.mode=m;updScene();
+  $("wk").classList.toggle("hide",m!=="work");
+  $("sl").classList.toggle("hide",m!=="slack");
+  const b=$("tg");
+  if(m==="work"){b.textContent="Lướt mạng (Space)";b.classList.remove("w")}
+  else{b.textContent="Quay lại Excel (Space)";b.classList.add("w");buildFeed()}
+}
+function toggle(){
+  if(!S||S.over)return;
+  SFX.click();setMode(S.mode==="work"?"slack":"work");
+  if(S.mode==="slack"&&S.boss==="here")caught();
+}
+function caught(){
+  if(S.caught)return;
+  S.caught=true;S.strikes++;SFX.caught();
+  say("Sếp bắt gặp bạn đang lướt mạng. Bị cảnh cáo!");
+  if(S.strikes>=3)end(false,"Bị sa thải","Ba lần cảnh cáo là đủ. Sếp mời bạn xuống phòng nhân sự.");
+}
+function setBoss(state){
+  S.boss=state;
+  const el=$("boss");el.className="boss "+(state==="away"?"":state);updScene();
+  const em={away:"🚪",warn:"👣",here:"😠"}[state];
+  const tx={away:"Sếp đang họp trong phòng.",warn:"Có tiếng bước chân ngoài hành lang!",here:"Sếp đứng ngay sau lưng bạn."}[state];
+  $("bem").textContent=em;$("btx").textContent=tx;
+}
+function end(win,title,msg){
+  S.over=true;cancelAnimationFrame(raf);$("zalo").classList.add("hide");win?SFX.win():SFX.lose();
+  $("card").innerHTML=`<h1>${title}</h1><p>${msg}</p><p>Điểm chill: <b>${Math.round(S.chill)}</b> · Cảnh cáo: ${S.strikes}/3</p><input class="nm" id="nm" maxlength="16" placeholder="Tên của bạn" aria-label="Tên của bạn"><div class="row"><button class="btn sm" id="shr">Chia sẻ điểm</button><button class="btn sm" id="sv">Lưu vào bảng điểm</button></div><div class="lb" id="lb"></div><button class="btn" id="go">Chơi lại</button>`;endExtras(title);
+  $("go").onclick=start;
+  $("ov").classList.remove("hide");
+}
+function loop(now){
+  if(S.over)return;
+  const dt=Math.min((now-last)/1000,.2);last=now;
+  S.t+=dt*6;
+  const prog=(S.t-START)/(END-START);
+  if(S.mode==="work"){S.dil+=4*dt;S.fun-=3*dt}
+  else{S.dil-=5*dt;S.fun+=6*dt;S.chill+=3*dt}
+  S.dil=Math.min(100,S.dil);S.fun=Math.min(100,S.fun);
+
+  S.bt-=dt;
+  if(S.boss==="away"&&S.bt<=0){setBoss("warn");SFX.step();S.bt=Math.max(.7,1.6-prog*.8);say("Nghe tiếng bước chân. Chuẩn bị chuyển màn hình!")}
+  else if(S.boss==="warn"&&S.bt<=0){setBoss("here");S.bt=1.8;S.caught=false;if(S.mode==="slack")caught()}
+  else if(S.boss==="here"&&S.bt<=0){
+    setBoss("away");S.bt=3+Math.random()*(6-prog*2);
+    if(!S.caught&&!S.over)say("Sếp đi qua mà không nghi ngờ gì.");
+  }
+  if(S.over)return;
+
+  zaloTick(dt);if(S.dil<=0)return end(false,"Bị đuổi vì lười","Tiến độ về 0. Sếp mở file ra và thấy bảng tính trống.");
+  if(S.fun<=0)return end(false,"Kiệt sức","Bạn quá chán, nộp đơn nghỉ việc ngay giữa buổi họp.");
+  if(S.t>=END)return end(true,"17:00, tan làm!","Bạn sống sót qua một ngày mà không bị bắt gặp quá ba lần.");
+
+  $("clock").textContent=fmt(S.t);
+  $("stk").textContent="●".repeat(S.strikes)+"○".repeat(3-S.strikes);
+  $("bd").querySelector("b").style.width=S.dil+"%";
+  $("bf").querySelector("b").style.width=S.fun+"%";
+  $("vd").textContent=Math.round(S.dil);$("vf").textContent=Math.round(S.fun);
+  raf=requestAnimationFrame(loop);
+}
+
+$("tg").onclick=toggle;
+$("mute").onclick=()=>{muted=!muted;$("mute").textContent=muted?"🔇":"🔊"};
+$("zalo").onclick=()=>{if(!S||S.over||S.za<=0)return;S.fun=Math.min(100,S.fun+12);S.chill+=8;S.dil-=3;S.za=0;$("zalo").classList.add("hide");SFX.click();say("Trả lời Zalo nhanh gọn: +12 vui vẻ.");if(S.boss==="here")caught()};
+document.addEventListener("keydown",e=>{if(e.code==="Space"){e.preventDefault();toggle()}});
+$("card").innerHTML=`<h1>Trốn việc 8h–17h</h1>
+<p>Sống sót đến 17:00. Nhấn <kbd>Space</kbd> hoặc nút bên dưới để đổi giữa Excel và Facebook.</p>
+<p>Lướt mạng làm bạn vui hơn nhưng tụt tiến độ. Làm việc thì ngược lại. Khi nghe tiếng bước chân, hãy quay về Excel trước khi sếp tới.</p>
+<p>Tin nhắn Zalo hiện lên? Bấm vào để +12 vui vẻ, nhưng đừng để sếp thấy. Bật loa để nghe tiếng bước chân.</p>
+<p>Thua nếu bị cảnh cáo 3 lần, tiến độ về 0, hoặc hết vui.</p>
+<button class="btn" id="go">Vào ca làm</button>`;
+$("go").onclick=start;
+(async()=>{try{if(!window.claude)return;const d=await claude.use("db"),u=await claude.use("user");if(!d)return;DB=d;if(u)UID=await u.id();d.collection("scores").orderBy("score","desc").limit(8).onSnapshot(s=>{remote=s.docs.map(x=>x.data());renderLB()},()=>{})}catch(e){}})();
+</script>
+</body>
+</html>
