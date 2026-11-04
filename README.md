@@ -3,7 +3,7 @@
 
 Game mô phỏng một ngày công sở: lén lướt Facebook, nhắn Zalo rồi kịp quay về Excel trước khi sếp tới. Cân bằng giữa chăm chỉ và vui vẻ, né ba lần cảnh cáo và sống sót đến 17:00.
 
-**Chơi ngay:** [https://gameduaxe2s-cpu/tronvieconline.github.io](https://gameduaxe2s-cpu.github.io/tronvieconline/)
+**Chơi ngay:** [[https://gameduaxe2s-cpu/tronvieconline.github.io](https://gameduaxe2s-cpu.github.io/tronvieconl](https://louischau86.github.io/tronvieconline/)ine/)
 
 ## Cách chơi
 
@@ -32,20 +32,6 @@ Một ngày làm việc kéo dài khoảng 90 giây ngoài đời thực, tươn
 - Hỗ trợ giao diện sáng và tối theo cài đặt của thiết bị, dùng được trên điện thoại.
 - Bảng điểm cao lưu trong trình duyệt của mỗi người chơi, kèm nút chia sẻ điểm.
 
-## Đưa lên GitHub Pages
-
-1. Tạo repository mới ở chế độ Public.
-2. Tải file `index.html` (và `README.md` này) lên repository.
-3. Vào **Settings → Pages**, ở mục **Source** chọn **Deploy from a branch**, chọn nhánh `main` và thư mục `/ (root)`, rồi bấm **Save**.
-4. Chờ một đến hai phút, trang sẽ có mặt tại `https://TEN-CUA-BAN.github.io/TEN-REPO/`.
-
-## Chạy trên máy
-
-Mở trực tiếp file `index.html` bằng trình duyệt. Không cần máy chủ.
-
-## Tùy chỉnh
-
-Các thông số cân bằng game nằm trong hàm `loop` của `index.html`:
 
 | Thông số | Vị trí trong code | Mặc định |
 | --- | --- | --- |
@@ -60,4 +46,5 @@ Các thông số cân bằng game nằm trong hàm `loop` của `index.html`:
 Bảng điểm trong bản này chỉ lưu cục bộ trên từng thiết bị. Muốn có bảng xếp hạng chung giữa nhiều người chơi, bạn cần nối thêm một dịch vụ lưu dữ liệu như Firebase hoặc Supabase.
 
 ## Giấy phép
+© 2026 Châu Đa Luân. Tất cả các quyền được bảo lưu.
 
