@@ -1,5 +1,5 @@
 [README.md](https://github.com/user-attachments/files/34351588/README.md)
-# Trốn việc 8h–17h
+# Trốn việc online
 
 Game mô phỏng một ngày công sở: lén lướt Facebook, nhắn Zalo rồi kịp quay về Excel trước khi sếp tới. Cân bằng giữa chăm chỉ và vui vẻ, né ba lần cảnh cáo và sống sót đến 17:00.
 
