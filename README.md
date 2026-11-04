@@ -3,9 +3,7 @@
 
 Game mô phỏng một ngày công sở: lén lướt Facebook, nhắn Zalo rồi kịp quay về Excel trước khi sếp tới. Cân bằng giữa chăm chỉ và vui vẻ, né ba lần cảnh cáo và sống sót đến 17:00.
 
-**Chơi ngay:** https://TEN-CUA-BAN.github.io/TEN-REPO/
-
-> Nhớ thay `TEN-CUA-BAN` và `TEN-REPO` bằng tên tài khoản và tên repository của bạn.
+**Chơi ngay:** https://gameduaxe2s-cpu/tronvieconline.github.io
 
 ## Cách chơi
 
@@ -63,4 +61,3 @@ Bảng điểm trong bản này chỉ lưu cục bộ trên từng thiết bị.
 
 ## Giấy phép
 
-Bạn tự do dùng, sửa và chia sẻ. Hãy thêm file `LICENSE` (ví dụ MIT) nếu muốn quy định rõ điều khoản.
