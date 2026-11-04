@@ -3,7 +3,7 @@
 
 Game mô phỏng một ngày công sở: lén lướt Facebook, nhắn Zalo rồi kịp quay về Excel trước khi sếp tới. Cân bằng giữa chăm chỉ và vui vẻ, né ba lần cảnh cáo và sống sót đến 17:00.
 
-**Chơi ngay:** https://gameduaxe2s-cpu/tronvieconline.github.io
+**Chơi ngay:** [https://gameduaxe2s-cpu/tronvieconline.github.io](https://gameduaxe2s-cpu.github.io/tronvieconline/)
 
 ## Cách chơi
 
